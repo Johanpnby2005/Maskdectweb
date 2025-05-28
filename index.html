@@ -10,8 +10,7 @@
 <body>
   <div class="container">
     <h1>Detector de Mascarillas 😷</h1>
-    <p>Envía una imagen desde App Inventor para saber si usas la mascarilla correctamente.</p>
-
+    <p>Sube una imagen para saber si usas la mascarilla correctamente.</p>
     <div class="preview">
       <img id="previewImage" src="" alt="Vista previa" style="max-width: 100%; height: auto;">
     </div>
@@ -20,44 +19,6 @@
     <div id="result"></div>
   </div>
 
-  <script>
-    let model;
-
-    window.onload = async () => {
-      model = await tf.loadLayersModel("tfjs_model3/model.json");
-      console.log("✅ Modelo cargado");
-    };
-
-    // Recibir imagen base64 desde MIT App Inventor
-    window.addEventListener("message", (event) => {
-      const base64Image = event.data;
-      const img = document.getElementById("previewImage");
-      img.src = base64Image;
-    });
-
-    async function predict() {
-      const img = document.getElementById("previewImage");
-      if (!img.src.startsWith("data:image")) {
-        document.getElementById("result").textContent = "⚠️ No se ha recibido una imagen válida.";
-        return;
-      }
-
-      const tensor = tf.browser.fromPixels(img)
-        .resizeNearestNeighbor([150, 150]) // Cambia a [224, 224] si tu modelo lo requiere
-        .toFloat()
-        .div(255.0)
-        .expandDims();
-
-      const prediction = model.predict(tensor);
-      const predArray = await prediction.array();
-      const index = predArray[0].indexOf(Math.max(...predArray[0]));
-
-      const etiquetas = ["Con mascarilla", "Mal puesta", "Sin mascarilla"];
-      const colores = ["#28a745", "#ffc107", "#dc3545"];
-
-      document.getElementById("result").textContent = `Resultado: ${etiquetas[index]}`;
-      document.getElementById("result").style.color = colores[index];
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
