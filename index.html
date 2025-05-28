@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detector de Mascarillas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Detector de Mascarillas 😷</h1>
+    <p>Sube una imagen para saber si usas la mascarilla correctamente.</p>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <div class="preview">
+      <img id="previewImage" src="" alt="Vista previa">
+    </div>
+    <button onclick="predict()">Detectar</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
