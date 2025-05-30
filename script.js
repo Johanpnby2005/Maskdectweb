@@ -47,7 +47,7 @@ async function predict() {
   const index = predArray[0].indexOf(Math.max(...predArray[0]));
   const etiquetas = [ "Mascarrila mal puesta", "Con mascarilla", "Sin mascarilla"];
   const colores = ["#ffc107", "#28a745", "#dc3545"];
-
+  console.log("Predicción cruda:", predArray[0]);
 
   resultDiv.textContent = `Resultado: ${etiquetas[index]}`;
   resultDiv.style.color = colores[index];
